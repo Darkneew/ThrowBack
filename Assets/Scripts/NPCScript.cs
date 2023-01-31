@@ -15,6 +15,7 @@ public enum Category
 
 public class NPCScript : MonoBehaviour
 {
+    public string Name { get;} = "Bob";
     // NPC Constant (range between 0 and 1)
     public float FearPropension { get; private set; }
     public float Rebellion { get; private set; }
@@ -28,6 +29,25 @@ public class NPCScript : MonoBehaviour
     public float PoliticalAgreement { get; private set; }
     public float Fear { get; private set; }
     public float Animosity { get; private set; }
+
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = this.GetComponent<Animator>();
+        GameState.Main.addPauseEvent(Pause, 1);
+        GameState.Main.addUnpauseEvent(Unpause, 1);
+    }
+
+    public void Pause()
+    {
+        _animator.speed = 0f;
+    }
+
+    public void Unpause()
+    {
+        _animator.speed = 1f;
+    }
 
     public NPCScript (float fearPropension, float calm, float popularity, float animosity, float rebellion, float perception, Category category)
     {

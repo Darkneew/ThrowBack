@@ -13,7 +13,7 @@
                         "politicalAgreement":8,
                         "fear":0
                     },
-                    "contents":"How are you?", // content of the message
+                    "content":"How are you?", // content of the message
                     "options":[1, 2, 3] // options to reply
                 }
             ]

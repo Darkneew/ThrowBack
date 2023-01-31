@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\GameState.cs" />
     <Compile Include="Assets\Scripts\NPCScript.cs" />
+    <Compile Include="Assets\Scripts\CharacterAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -8,9 +8,9 @@ public enum GamePeriod
 {
     Running,
     Starting,
-    Ending
+    Ending,
+    Talking
 }
-
 public class GameState : MonoBehaviour
 {
     public float RunTime { get; set; } = 30;
@@ -22,10 +22,12 @@ public class GameState : MonoBehaviour
 
     public GamePeriod State { get; private set; } = GamePeriod.Starting;
 
-    public List<NPCScript> NPCs { get; private set; } 
+    public List<NPCScript> NPCs { get; private set; } = new List<NPCScript>();
 
     private PriorityQueue<GameEvent> endEvents;
     private PriorityQueue<GameEvent> startEvents;
+    private PriorityQueue<GameEvent> pauseEvents;
+    private PriorityQueue<GameEvent> unpauseEvents;
 
     private float _startTime;
     private float _deltaRunTime;
@@ -55,15 +57,26 @@ public class GameState : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    private void Reset()
+    public GameState()
     {
         Main = this;
-        NPCs = new List<NPCScript>();
-        endEvents = new PriorityQueue<GameEvent>();
         startEvents = new PriorityQueue<GameEvent>();
+        endEvents = new PriorityQueue<GameEvent>();
+        pauseEvents = new PriorityQueue<GameEvent>();
+        unpauseEvents = new PriorityQueue<GameEvent>();
     }
 
     public void AddNPC (NPCScript npc) { NPCs.Add(npc); }
+
+    public void StartDialogue()
+    {
+        State = GamePeriod.Talking;
+    }
+
+    public void EndDialogue()
+    {
+        State = GamePeriod.Running;
+    }
 
     // Update is called once per frame
     private void Update()
@@ -100,6 +113,8 @@ public class GameState : MonoBehaviour
     }
 
     public void addStartEvent (GameEvent e, float priority) {startEvents.Insert(e, priority);} 
-    public void addEndEvent(GameEvent e, float priority) { endEvents.Insert(e, priority); } 
+    public void addEndEvent(GameEvent e, float priority) { endEvents.Insert(e, priority); }
+    public void addPauseEvent(GameEvent e, float priority) { pauseEvents.Insert(e, priority); }
+    public void addUnpauseEvent(GameEvent e, float priority) { unpauseEvents.Insert(e, priority); }
 
 }
