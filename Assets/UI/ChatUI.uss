@@ -1,0 +1,6 @@
+.reply {
+    color: rgba(217, 215, 127, 255);
+    background-color: rgba(9, 67, 20, 255);
+    position: relative;
+    width: 80%;
+}

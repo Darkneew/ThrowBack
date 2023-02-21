@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 public class PriorityQueue<T>
 {
     public class Node
@@ -17,12 +20,12 @@ public class PriorityQueue<T>
 
     public Node Beginning { get; private set; }
 
-    public PriorityQueue () 
+    public PriorityQueue()
     {
         Beginning = null;
     }
 
-    public void Insert (T obj, float priority)
+    public void Insert(T obj, float priority)
     {
         Node prevNode = Beginning;
         if (prevNode == null)
@@ -34,7 +37,7 @@ public class PriorityQueue<T>
         {
             if (prevNode.Next == null)
             {
-                Node node = new Node (prevNode, null, priority, obj);
+                Node node = new Node(prevNode, null, priority, obj);
                 prevNode.Next = node;
                 return;
             }
@@ -51,5 +54,89 @@ public class PriorityQueue<T>
         prevNode.Previous.Next = n;
         prevNode.Previous = n;
         return;
+    }
+}
+
+public class PriorityQueue<T, Priority> where Priority : System.IComparable<Priority>
+{
+    class Element
+    {
+        public T value { get; set; }
+        public Priority priority { get; set; }
+
+        public Element(T value, Priority priority)
+        {
+            this.value = value;
+            this.priority = priority;
+        }
+    }
+
+    List<Element> heap;
+    Dictionary<T, int> indices;
+
+    public bool Empty()
+    {
+        return heap.Count == 0;
+    }
+
+    public void AddWithPriority(T value, Priority priority)
+    {
+        this.heap.Add(new Element(value, priority));
+        this.indices.Add(value, this.heap.Count - 1);
+        this.HeapifyUp(this.heap.Count - 1);
+    }
+
+    public T ExctractMin()
+    {
+        Element temp = this.heap.Last();
+        this.heap[this.heap.Count - 1] = this.heap[0];
+        this.heap[0] = temp;
+        T value = this.heap.Last().value;
+
+        this.heap.RemoveAt(this.heap.Count - 1);
+        this.indices.Remove(value);
+        this.HeapifyDown(0);
+
+        return value;
+    }
+
+    public void DecreasePriority(T value, Priority new_priority)
+    {
+        int index = this.indices[value];
+        this.heap[index].priority = new_priority;
+        HeapifyUp(index);
+    }
+
+    private void HeapifyUp(int index)
+    {
+        int parent = (index - 1) / 2;
+        if (this.heap[index].priority.CompareTo(this.heap[parent].priority) < 0)
+        {
+            (this.heap[index], this.heap[parent]) = (this.heap[parent], this.heap[index]);
+            this.HeapifyUp(parent);
+        }
+    }
+
+    private void HeapifyDown(int index)
+    {
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+        int smallest = index;
+
+        if (left < this.heap.Count && this.heap[left].priority.CompareTo(this.heap[smallest].priority) < 0)
+        {
+            smallest = left;
+        }
+
+        if (right < this.heap.Count && this.heap[right].priority.CompareTo(this.heap[smallest].priority) < 0)
+        {
+            smallest = right;
+        }
+
+        if (smallest != index)
+        {
+            (this.heap[index], this.heap[smallest]) = (this.heap[smallest], this.heap[index]);
+            this.HeapifyDown(smallest);
+        }
     }
 }

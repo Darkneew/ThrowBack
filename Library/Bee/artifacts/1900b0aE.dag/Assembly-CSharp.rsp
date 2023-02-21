@@ -355,9 +355,13 @@
 "Assets/Scripts/CameraScript.cs"
 "Assets/Scripts/CharacterAction.cs"
 "Assets/Scripts/CharacterMovement.cs"
+"Assets/Scripts/ChatScript.cs"
 "Assets/Scripts/GameState.cs"
 "Assets/Scripts/NPCScript.cs"
+"Assets/Scripts/PathFinder.cs"
+"Assets/Scripts/PriorityList.cs"
 "Assets/Scripts/PriorityQueue.cs"
+"Assets/Scripts/TalkIndicator.cs"
 -langversion:9.0
 
 /deterministic

@@ -32,11 +32,17 @@ public class NPCScript : MonoBehaviour
 
     private Animator _animator;
 
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
     private void Start()
     {
         _animator = this.GetComponent<Animator>();
         GameState.Main.addPauseEvent(Pause, 1);
         GameState.Main.addUnpauseEvent(Unpause, 1);
+        GameState.Main.AddNPC(this);
     }
 
     public void Pause()
@@ -62,7 +68,6 @@ public class NPCScript : MonoBehaviour
         PoliticalAgreement = 0;
         Fear = 0;
 
-        GameState.Main.AddNPC(this);
     }
 
     public void RunGossip (float importance, float rebellion, float scariness)

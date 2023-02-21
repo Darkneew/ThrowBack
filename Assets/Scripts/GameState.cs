@@ -24,10 +24,12 @@ public class GameState : MonoBehaviour
 
     public List<NPCScript> NPCs { get; private set; } = new List<NPCScript>();
 
-    private PriorityQueue<GameEvent> endEvents;
-    private PriorityQueue<GameEvent> startEvents;
-    private PriorityQueue<GameEvent> pauseEvents;
-    private PriorityQueue<GameEvent> unpauseEvents;
+    [SerializeField] private GameObject TalkUI;
+
+    private PriorityList<GameEvent> endEvents;
+    private PriorityList<GameEvent> startEvents;
+    private PriorityList<GameEvent> pauseEvents;
+    private PriorityList<GameEvent> unpauseEvents;
 
     private float _startTime;
     private float _deltaRunTime;
@@ -55,15 +57,14 @@ public class GameState : MonoBehaviour
             }
         }
     }
-
-    // Start is called before the first frame update
+  
     public GameState()
     {
         Main = this;
-        startEvents = new PriorityQueue<GameEvent>();
-        endEvents = new PriorityQueue<GameEvent>();
-        pauseEvents = new PriorityQueue<GameEvent>();
-        unpauseEvents = new PriorityQueue<GameEvent>();
+        startEvents = new PriorityList<GameEvent>();
+        endEvents = new PriorityList<GameEvent>();
+        pauseEvents = new PriorityList<GameEvent>();
+        unpauseEvents = new PriorityList<GameEvent>();
     }
 
     public void AddNPC (NPCScript npc) { NPCs.Add(npc); }
@@ -71,11 +72,14 @@ public class GameState : MonoBehaviour
     public void StartDialogue()
     {
         State = GamePeriod.Talking;
+        TalkUI.SetActive(true);
+
     }
 
     public void EndDialogue()
     {
         State = GamePeriod.Running;
+        TalkUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -83,7 +87,7 @@ public class GameState : MonoBehaviour
     {
         if (State == GamePeriod.Running && Time.fixedTime - _startTime > _deltaRunTime)
         {
-            PriorityQueue<GameEvent>.Node n = endEvents.Beginning;
+            PriorityList<GameEvent>.Node n = endEvents.Beginning;
             while (n != null) 
             {
                 n.Object();
@@ -93,7 +97,8 @@ public class GameState : MonoBehaviour
         }
         else if (State == GamePeriod.Starting)
         {
-            PriorityQueue<GameEvent>.Node n = startEvents.Beginning;
+            TalkUI.SetActive(false);
+            PriorityList<GameEvent>.Node n = startEvents.Beginning;
             while (n != null)
             {
                 n.Object();

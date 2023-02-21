@@ -1,0 +1,30 @@
+{
+    "UxmlGuid": "a94f09a96b9955a4787fa3751d0229a3",
+    "UxmlPath": "Assets/ChatUI.uxml",
+    "CanvasX": -188,
+    "CanvasY": 0,
+    "CanvasWidth": 996,
+    "CanvasHeight": 521,
+    "MatchGameView": true,
+    "ZoomScale": 0.5,
+    "PanOffset": {
+        "x": 255.73324584960938,
+        "y": 207.86660766601563
+    },
+    "ColorModeBackgroundOpacity": 1.0,
+    "ImageModeCanvasBackgroundOpacity": 1.0,
+    "CameraModeCanvasBackgroundOpacity": 1.0,
+    "EnableCanvasBackground": false,
+    "CanvasBackgroundMode": 0,
+    "CanvasBackgroundColor": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 255.0
+    },
+    "CanvasBackgroundImage": {
+        "instanceID": 0
+    },
+    "CanvasBackgroundImageScaleMode": 1,
+    "CanvasBackgroundCameraName": ""
+}
