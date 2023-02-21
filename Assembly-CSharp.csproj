@@ -63,9 +63,9 @@
     <Compile Include="Assets\Scripts\GameState.cs" />
     <Compile Include="Assets\Scripts\PriorityQueue.cs" />
     <Compile Include="Assets\Scripts\TalkIndicator.cs" />
+    <Compile Include="Assets\Scripts\ChatScript.cs" />
     <Compile Include="Assets\Scripts\NPCScript.cs" />
     <Compile Include="Assets\Scripts\CharacterAction.cs" />
-    <Compile Include="Assets\Scripts\ChatScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -82,6 +82,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\UI\TransparentChatUI.uxml" />
     <None Include="Assets\UI\ChatUI.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
