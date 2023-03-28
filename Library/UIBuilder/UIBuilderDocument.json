@@ -11,45 +11,31 @@
         "m_CodePreviewVisible": true,
         "m_OpenUXMLFiles": [
             {
-                "m_OpenUSSFiles": [
-                    {
-                        "m_StyleSheet": {
-                            "fileID": 7433441132597879392,
-                            "guid": "53dec173e13899144af1f8fc068479dc",
-                            "type": 3
-                        },
-                        "m_BackupStyleSheet": {
-                            "instanceID": 0
-                        },
-                        "m_OldPath": "Assets/UI/ChatUI.uss"
-                    }
-                ],
+                "m_OpenUSSFiles": [],
                 "m_VisualTreeAssetBackup": {
                     "instanceID": 0
                 },
-                "m_OpenendVisualTreeAssetOldPath": "Assets/UI/ChatUI.uxml",
+                "m_OpenendVisualTreeAssetOldPath": "Assets/UI/UI.uxml",
                 "m_VisualTreeAsset": {
                     "fileID": 9197481963319205126,
-                    "guid": "a94f09a96b9955a4787fa3751d0229a3",
+                    "guid": "c485d3f13a1d242459f2808c5f6136cb",
                     "type": 3
                 },
                 "m_ActiveStyleSheet": {
-                    "fileID": 7433441132597879392,
-                    "guid": "53dec173e13899144af1f8fc068479dc",
-                    "type": 3
+                    "instanceID": 0
                 },
                 "m_Settings": {
-                    "UxmlGuid": "a94f09a96b9955a4787fa3751d0229a3",
-                    "UxmlPath": "Assets/UI/ChatUI.uxml",
-                    "CanvasX": -188,
+                    "UxmlGuid": "c485d3f13a1d242459f2808c5f6136cb",
+                    "UxmlPath": "Assets/UI/UI.uxml",
+                    "CanvasX": 0,
                     "CanvasY": 0,
                     "CanvasWidth": 1044,
-                    "CanvasHeight": 428,
+                    "CanvasHeight": 424,
                     "MatchGameView": true,
-                    "ZoomScale": 1.0,
+                    "ZoomScale": 1.25,
                     "PanOffset": {
-                        "x": 288.49688720703127,
-                        "y": 119.31840515136719
+                        "x": -927.9252319335938,
+                        "y": -278.621826171875
                     },
                     "ColorModeBackgroundOpacity": 1.0,
                     "ImageModeCanvasBackgroundOpacity": 1.0,

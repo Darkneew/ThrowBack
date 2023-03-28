@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public delegate void GameEvent();
 
@@ -25,6 +26,8 @@ public class GameState : MonoBehaviour
     public List<NPCScript> NPCs { get; private set; } = new List<NPCScript>();
 
     [SerializeField] private GameObject TalkUI;
+    [SerializeField] private GameObject GeneralUI;
+    private Label TimerUI;
 
     private PriorityList<GameEvent> endEvents;
     private PriorityList<GameEvent> startEvents;
@@ -33,6 +36,12 @@ public class GameState : MonoBehaviour
 
     private float _startTime;
     private float _deltaRunTime;
+
+    public void DisplayUI (GameObject UI, bool Hide)
+    {
+        if (Hide) UI.GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("Container").style.display = DisplayStyle.Flex;
+        else UI.GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("Container").style.display = DisplayStyle.None;
+    }
 
     public void Gossip (float ActionImportance, float Rebellion, float Scariness) // parameters ranged between 0 and 1, except scariness between -1 and 1
     {
@@ -72,21 +81,24 @@ public class GameState : MonoBehaviour
     public void StartDialogue()
     {
         State = GamePeriod.Talking;
-        TalkUI.SetActive(true);
-
+        DisplayUI(TalkUI, true);
     }
 
     public void EndDialogue()
     {
         State = GamePeriod.Running;
-        TalkUI.SetActive(false);
+        DisplayUI(TalkUI, false);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (State == GamePeriod.Running && Time.fixedTime - _startTime > _deltaRunTime)
+        if (TimerUI != null) TimerUI.text = Mathf.Floor(_deltaRunTime - Time.fixedTime + _startTime).ToString();
+        if ((State == GamePeriod.Running || State == GamePeriod.Talking) && Time.fixedTime - _startTime > _deltaRunTime)
         {
+            State = GamePeriod.Ending;
+            DisplayUI(GeneralUI, false);
+            if (State == GamePeriod.Talking) EndDialogue();
             PriorityList<GameEvent>.Node n = endEvents.Beginning;
             while (n != null) 
             {
@@ -97,7 +109,9 @@ public class GameState : MonoBehaviour
         }
         else if (State == GamePeriod.Starting)
         {
-            TalkUI.SetActive(false);
+            DisplayUI(GeneralUI, true);
+            TimerUI = GeneralUI.GetComponent<UIDocument>().rootVisualElement.Q<Label>("Timer");
+            DisplayUI(TalkUI, false);
             PriorityList<GameEvent>.Node n = startEvents.Beginning;
             while (n != null)
             {
@@ -112,6 +126,7 @@ public class GameState : MonoBehaviour
 
     private IEnumerator Ending()
     {
+        DisplayUI(TalkUI, false);
         yield return new WaitForSeconds(1f);
         State = GamePeriod.Starting;
         yield return null;
